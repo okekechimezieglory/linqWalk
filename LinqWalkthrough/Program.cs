@@ -34,16 +34,47 @@ namespace LinqWalkthrough
 
             //
 
+            //var selectQuery = (from emp in employees
+            //                   select new Employee()
+            //                   {
+            //                       Id = emp.Id,
+            //                       Email = emp.Email
+            //                   }).ToList();
+
+            //foreach (var item in basicQuery)
+            //{
+            //    Console.WriteLine($"Id = { item.Id}, Name= { item.Name}, Email is = + { item.Email}");
+            //}
+
+            // query syntax
             var selectQuery = (from emp in employees
-                               select new Employee()
+                               select new Student()
                                {
-                                   Id = emp.Id,
-                                   Email = emp.Email
+                                   StudentId = emp.Id,
+                                   StEmail = emp.Email,
+                                   FullName = emp.Name
                                }).ToList();
 
-            foreach (var item in basicQuery)
+            // method syntax
+            var selectMethod = employees.Select(emp => new Student()
             {
-                Console.WriteLine($"Id = { item.Id}, Name= { item.Name}, Email is = + { item.Email}");
+                StudentId = emp.Id,
+                StEmail = emp.Email,
+                FullName = emp.Name
+            }).ToList();
+
+            // anonymous type : to achieve that, simply exclude the datasource being the class name, i.e Student when performing the selection and pass in your custom types that will work at run time as shown below, you can also perform that for index and values as well if you wish
+
+            //var selectAnonymous = employees.Select(emp => new
+            //{
+            //    CustomId = emp.Id,
+            //    CustomEmail = emp.Email,
+            //    CustomFullName = emp.Name
+            //}).ToList();
+
+            foreach (var item in selectQuery)
+            {
+                Console.WriteLine($"Id = { item.StudentId}, Name= { item.FullName}, Email is = + { item.StEmail}");
             }
 
             Console.ReadLine();
