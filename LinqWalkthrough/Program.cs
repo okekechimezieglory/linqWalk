@@ -12,32 +12,41 @@ namespace LinqWalkthrough
 
             List<Employee> employees = new List<Employee>()
             {
-                new Employee() {Id=1, Name="John"},
-                new Employee() {Id=2, Name="Bisi"}
+                new Employee() {Id=1, Name="John", Email= "john@gmail.com"},
+                new Employee() {Id=2, Name="Bisi", Email= "bisi@gmail.com"},
+                new Employee() {Id=3, Name="Mary", Email= "mary@gmail.com"},
+                new Employee() {Id=4, Name="Gbenga", Email= "gbenga@gmail.com"}
             };
 
-            IEnumerable<Employee> query = from emp in employees
-                                          where emp.Id == 1
-                                          select emp;
+            var basicQuery = (from emp in employees
+                             select emp).ToList();
 
-            // IQuerable implementation
-            IQueryable<Employee> query1 = employees.AsQueryable().Where(x => x.Id == 1);
+            // basic method implementation
 
-            foreach (var q in query1)
+            var basicMethod = employees.ToList();
+
+            // operations
+
+            var basicPropQuery = (from emp in employees
+                                  select emp.Id).ToList();
+
+            var basicPropMethod = employees.Select(emp => emp.Id).ToList();
+
+            //
+
+            var selectQuery = (from emp in employees
+                               select new Employee()
+                               {
+                                   Id = emp.Id,
+                                   Email = emp.Email
+                               }).ToList();
+
+            foreach (var item in basicQuery)
             {
-                Console.WriteLine("Id = " + q.Id + " and name = " + q.Name);
+                Console.WriteLine($"Id = { item.Id}, Name= { item.Name}, Email is = + { item.Email}");
             }
-            //IEnumerable<int> querySyntax = from obj in list 
-            //                               where obj > 2 
-            //                               select obj;
-            Console.WriteLine("Hello World!");
-            //Console.WriteLine(querySyntax);
-        }
 
-        class Employee
-        {
-            public int Id { get; set; }
-            public string Name { get; set; }
+            Console.ReadLine();
         }
     }
 }
