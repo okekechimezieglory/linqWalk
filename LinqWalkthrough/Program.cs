@@ -20,7 +20,10 @@ namespace LinqWalkthrough
                                           where emp.Id == 1
                                           select emp;
 
-            foreach (var q in query)
+            // IQuerable implementation
+            IQueryable<Employee> query1 = employees.AsQueryable().Where(x => x.Id == 1);
+
+            foreach (var q in query1)
             {
                 Console.WriteLine("Id = " + q.Id + " and name = " + q.Name);
             }
