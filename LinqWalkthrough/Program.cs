@@ -8,36 +8,18 @@ namespace LinqWalkthrough
     {
         static void Main(string[] args)
         {
-            List<int> list = new List<int>() { 1, 2, 3, 4, 5, 6 };
+            List<string> strList = new List<string>() { "Okeke", "Chimezie", "Glory", "OghneKaro", "Chimex"};
 
-            List<Employee> employees = new List<Employee>()
-            {
-                new Employee() {Id=1, Name="John"},
-                new Employee() {Id=2, Name="Bisi"}
-            };
+            var methodResult = strList.SelectMany(str => str).ToList();
 
-            IEnumerable<Employee> query = from emp in employees
-                                          where emp.Id == 1
-                                          select emp;
+            // query syntax implementation
+            var queryResult = (from record in strList
+                               from character in record
+                               select character).ToList();  // there is no SelectMany implementation for the query syntax, 
+            //now, what I did is to do a kind of nesting, i.e record is a string in strList which is a list and character
+            // is a char in character that is a string
 
-            // IQuerable implementation
-            IQueryable<Employee> query1 = employees.AsQueryable().Where(x => x.Id == 1);
-
-            foreach (var q in query1)
-            {
-                Console.WriteLine("Id = " + q.Id + " and name = " + q.Name);
-            }
-            //IEnumerable<int> querySyntax = from obj in list 
-            //                               where obj > 2 
-            //                               select obj;
-            Console.WriteLine("Hello World!");
-            //Console.WriteLine(querySyntax);
-        }
-
-        class Employee
-        {
-            public int Id { get; set; }
-            public string Name { get; set; }
+            Console.ReadLine();
         }
     }
 }
