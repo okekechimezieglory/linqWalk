@@ -20,30 +20,62 @@ namespace LinqWalkthrough
             // is a char in character that is a string
 
 
+            //var dataSource = new List<Employee>()
+            //{
+            //    new Employee(){Id=1, Name="Johnson", Email="johnson@gmail.com", Programming=new List<string> (){"C#", "Python", "Java"}},
+            //     new Employee(){Id=2, Name="Serena", Email="serena@gmail.com", Programming=new List<string> (){"C++", "Python", "Php"}},
+            //      new Employee(){Id=3, Name="Emeka", Email="emeka@gmail.com", Programming=new List<string> (){"C", "Swift", "Xamarin"}}
+            //};
+
+            //var methodSyntax = dataSource.SelectMany(emp => emp.Programming).ToList();
+
+            //foreach (var item in methodSyntax)
+            //{
+            //    Console.WriteLine($"Programming = { item}");
+            //}
+
+
+            //// query syntax
+            //var querySyntax = (from emp in dataSource
+            //                   from skills in emp.Programming
+            //                   select skills).ToList();
+
+            //foreach (var item in querySyntax)
+            //{
+            //    Console.WriteLine($"Programming = { item}");
+            //}
+
+
             var dataSource = new List<Employee>()
             {
-                new Employee(){Id=1, Name="Johnson", Email="johnson@gmail.com", Programming=new List<string> (){"C#", "Python", "Java"}},
-                 new Employee(){Id=2, Name="Serena", Email="serena@gmail.com", Programming=new List<string> (){"C++", "Python", "Php"}},
-                  new Employee(){Id=3, Name="Emeka", Email="emeka@gmail.com", Programming=new List<string> (){"C", "Swift", "Xamarin"}}
+                new Employee(){Id=1, Name="Johnson", Email="johnson@gmail.com", Programming=
+
+                new List<Techs> {
+                    new Techs(){Technology = "C#"},
+                    new Techs(){Technology = "Java"},
+                    new Techs(){Technology = "Python"}}},
+
+                new Employee(){Id=2, Name="Serena", Email="serena@gmail.com", Programming=
+                new List<Techs> {
+                    new Techs(){Technology = "C++"},
+                    new Techs(){Technology = "Fortran"},
+                    new Techs(){Technology = "Pascal"}}},
+
+                new Employee(){Id=3, Name="Emeka", Email="emeka@gmail.com", Programming=
+                    new List<Techs> {
+                    new Techs(){Technology = "Go"},
+                    new Techs(){Technology = "Ruby"},
+                    new Techs(){Technology = "NodeJS"}}},
+
+                new Employee() {Id=4, Name="Agbo", Email="agbo@gmail.com", Programming= new List<Techs>()},
+                new Employee() {Id=5, Name="Joshua", Email="joshua@gmail.com", Programming= new List<Techs>()}
             };
 
-            var methodSyntax = dataSource.SelectMany(emp => emp.Programming).ToList();
+            var methodQuerySyntax = dataSource.Select(emp => emp.Programming).ToList();
 
-            foreach (var item in methodSyntax)
-            {
-                Console.WriteLine($"Programming = { item}");
-            }
-
-
-            // query syntax
             var querySyntax = (from emp in dataSource
-                               from skills in emp.Programming
-                               select skills).ToList();
-
-            foreach (var item in querySyntax)
-            {
-                Console.WriteLine($"Programming = { item}");
-            }
+                               from pro in emp.Programming
+                               select pro).ToList();
 
             Console.ReadLine();
         }

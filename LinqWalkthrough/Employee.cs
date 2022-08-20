@@ -12,6 +12,13 @@ namespace LinqWalkthrough
 
         public string Email { get; set; }
 
-        public List<string> Programming { get; set; }
+        //public List<string> Programming { get; set; }
+
+        public List<Techs> Programming { get; set; }
+    }
+
+    public class Techs
+    {
+        public string Technology { get; set; }
     }
 }
