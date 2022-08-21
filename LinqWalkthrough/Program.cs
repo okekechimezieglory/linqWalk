@@ -8,74 +8,67 @@ namespace LinqWalkthrough
     {
         static void Main(string[] args)
         {
-            //List<string> strList = new List<string>() { "Okeke", "Chimezie", "Glory", "OgheneKaro", "Chimex"};
+            var dataSource =  new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-            //var methodResult = strList.SelectMany(str => str).ToList();
+            var dataSourceString = new List<string>() { "Harry", "Khris", "Urchkid", "Chimex", "Uche", "Emeka", "Ebuka", "Ebube", "Happy", "Rachael" };
 
-            //// query syntax implementation
-            //var queryResult = (from record in strList
-            //                   from character in record
-            //                   select character).ToList();  // there is no SelectMany implementation for the query syntax, 
-            //now, what I did is to do a kind of nesting, i.e record is a string in strList which is a list and character
-            // is a char in character that is a string
+            var querySyntax = (from numb in dataSource
+                         where numb <= 4 || numb > 9   
+                         select numb).ToList();
+            //  you can change the operators to your prefered choice based on what you want as output, i.e using <, >, <=, >=, ||, &&, etc
 
+            var methodSyntax = dataSource.Where(number => number > 5).ToList();
 
-            //var dataSource = new List<Employee>()
-            //{
-            //    new Employee(){Id=1, Name="Johnson", Email="johnson@gmail.com", Programming=new List<string> (){"C#", "Python", "Java"}},
-            //     new Employee(){Id=2, Name="Serena", Email="serena@gmail.com", Programming=new List<string> (){"C++", "Python", "Php"}},
-            //      new Employee(){Id=3, Name="Emeka", Email="emeka@gmail.com", Programming=new List<string> (){"C", "Swift", "Xamarin"}}
-            //};
+            var querySyntaxStr = (from nameStr in dataSourceString
+                                 where nameStr.Length == 5
+                                 select nameStr).ToList();
 
-            //var methodSyntax = dataSource.SelectMany(emp => emp.Programming).ToList();
-
-            //foreach (var item in methodSyntax)
-            //{
-            //    Console.WriteLine($"Programming = { item}");
-            //}
-
-
-            //// query syntax
-            //var querySyntax = (from emp in dataSource
-            //                   from skills in emp.Programming
-            //                   select skills).ToList();
+            var methodSyntaxStr = dataSourceString.Where(strN => strN.Length > 5).ToList();
 
             //foreach (var item in querySyntax)
             //{
-            //    Console.WriteLine($"Programming = { item}");
+            //    Console.WriteLine(item);
             //}
 
-
-            var dataSource = new List<Employee>()
+            var dataSourceComplex = new List<Employee>()
             {
-                new Employee(){Id=1, Name="Johnson", Email="johnson@gmail.com", Programming=
+                new Employee() {Id = 1, Name="chimex", Email = "chimex@gmail.com", Programming=
 
-                new List<Techs> {
-                    new Techs(){Technology = "C#"},
-                    new Techs(){Technology = "Java"},
-                    new Techs(){Technology = "Python"}}},
+                new List<Techs>
+                {
+                    new Techs() {Technology = "C#"},
+                    new Techs() {Technology = "VB"},
+                    new Techs() {Technology = "C++"},
+                    new Techs() {Technology = "SQL"}
+                }},
+                new Employee() {Id = 2, Name="Glory", Email = "glory@gmail.com", Programming=
 
-                new Employee(){Id=2, Name="Serena", Email="serena@gmail.com", Programming=
-                new List<Techs> {
-                    new Techs(){Technology = "C++"},
-                    new Techs(){Technology = "Fortran"},
-                    new Techs(){Technology = "Pascal"}}},
+                new List<Techs>
+                {
+                    new Techs() {Technology = "PHP"},
+                    new Techs() {Technology = "LARAVEL"},
+                    new Techs() {Technology = "JAVA"},
+                    new Techs() {Technology = "RUBY"}
+                }},
 
-                new Employee(){Id=3, Name="Emeka", Email="emeka@gmail.com", Programming=
-                    new List<Techs> {
-                    new Techs(){Technology = "Go"},
-                    new Techs(){Technology = "Ruby"},
-                    new Techs(){Technology = "NodeJS"}}},
+                new Employee() {Id = 3, Name="karo", Email = "karo@gmail.com", Programming=
 
-                new Employee() {Id=4, Name="Agbo", Email="agbo@gmail.com", Programming= new List<Techs>()},
-                new Employee() {Id=5, Name="Joshua", Email="joshua@gmail.com", Programming= new List<Techs>()}
+                new List<Techs>
+                {
+                    new Techs() {Technology = "FORTRAN"},
+                    new Techs() {Technology = "NODEJS"},
+                    new Techs() {Technology = "PYTHON"},
+                    new Techs() {Technology = "XAMARIN"}
+                }},
+                new Employee() {Id = 4, Name = "Calistus", Email = "calistus@gmail.com", Programming= new List<Techs>()},
+                new Employee() {Id = 4, Name = "Neymar", Email = "neymar@gmail.com", Programming= new List<Techs>()},
             };
 
-            var methodQuerySyntax = dataSource.Select(emp => emp.Programming).ToList();
+            var querySyntaxComplex = (from emp in dataSourceComplex
+                                      where emp.Programming.Count == 0
+                                      select emp).ToList();
 
-            var querySyntax = (from emp in dataSource
-                               from pro in emp.Programming
-                               select pro).ToList();
+            var methodSyntaxComplex = dataSourceComplex.Where(emp => emp.Programming.Count == 0).ToList();
 
             Console.ReadLine();
         }
