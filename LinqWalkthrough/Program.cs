@@ -9,15 +9,17 @@ namespace LinqWalkthrough
         static void Main(string[] args)
         {
 
-            var dataSourceInt = new List<int>() { 1, 22, 3, 304, 15, 9, 2 };
+            var dataSourceInt = new List<int>() { 5, 12, 13, 1, 7, 53, 304, 15, 100, 9, 2 };
 
             var dataSourceString = new List<string>()
             {
-                "Adam",
-                "Igbudu",
-                "Kunle",
-                "Oladokun",
-                "Okonkwo"
+                "Smith",
+                "Mitchel",
+                "Collins",
+                "Johnson",
+                "Abel", 
+                "Evans",
+                "Thomas"
             };
 
             var dataSourceObject = new List<Employee>()
@@ -41,30 +43,27 @@ namespace LinqWalkthrough
                 Email = "paul@gmail.com"
             } };
 
-
-
             var querySyntax = (from num in dataSourceInt
-                               where num > 9 // use the where condition before applying your orderBy if needed as so
-                              orderby num
+                               orderby num descending
                                select num).ToList();
 
-            var methodSyntax = dataSourceInt.OrderBy(num => num).ToList();
+            var methodSyntax = dataSourceInt.OrderByDescending(num => num).ToList();
 
-            // for string
+            // for the string datasource
+
             var querySyntaxStr = (from name in dataSourceString
-                                  orderby name
+                                  orderby name descending
                                   select name).ToList();
 
-            var methodSyntaxStr = dataSourceString.Where(name => name.Length > 6).OrderBy(name => name).ToList();
+            var methodSyntaxStr = dataSourceString.OrderByDescending(name => name).Where(name => name.Length > 4).ToList();
 
-            // for the objects
+            // for the object
+
             var querySyntaxObj = (from emp in dataSourceObject
-                                  where(emp.Id > 1)
-                                  orderby emp.Id
-                                  select emp).ToList();
-            // condition can be done on the varying properties as well as ordering done on the varying properties also depending on what you want both for the query and method syntax
+                              orderby emp.Id descending
+                              select emp).ToList();
 
-            var methodSyntaxObj = dataSourceObject.OrderBy(emp => emp.Id).ToList();
+            var methodSyntaxObj = dataSourceObject.OrderByDescending(emp => emp.Id).ToList();
 
             foreach (var item in querySyntax)
             {
